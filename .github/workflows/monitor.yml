@@ -33,6 +33,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 新增：先拉取远程最新代码，解决版本冲突
+          git pull --rebase origin main || true
           git add docs/ data/
           git diff --cached --quiet || git commit -m "Update monitor data: $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
